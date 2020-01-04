@@ -105,7 +105,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var canvas = document.querySelector('canvas');
-var data = document.querySelector('.data');
 var c = canvas.getContext('2d');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -178,7 +177,6 @@ function () {
 
 
 var ballArray = [];
-var ball;
 
 function init() {
   ballArray = [];
