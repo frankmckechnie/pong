@@ -86,6 +86,32 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/assets/end-of-game.mp3":
+/*!************************************!*\
+  !*** ./src/assets/end-of-game.mp3 ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2fd02232b10907ecd763be4060f47292.mp3");
+
+/***/ }),
+
+/***/ "./src/assets/hit.mp3":
+/*!****************************!*\
+  !*** ./src/assets/hit.mp3 ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c57f0316a295265790a11aab8261b04f.mp3");
+
+/***/ }),
+
 /***/ "./src/js/ball.js":
 /*!************************!*\
   !*** ./src/js/ball.js ***!
@@ -135,6 +161,19 @@ function () {
       game.reset();
     }
   }, {
+    key: "incressSpeed",
+    value: function incressSpeed() {// if(this.dx >=  Math.abs(7)){
+      //     this.dx = 7;
+      // }else{
+      //     this.dx += 0.5;
+      // }
+      // if(this.dy >= Math.abs(7)){
+      //     this.dy = 7;
+      // }else{
+      //     this.dy += 0.5;
+      // }
+    }
+  }, {
     key: "update",
     value: function update(game) {
       if (this.y + this.radius + this.dy > game.canvas.height || this.y - this.radius <= 0) {
@@ -143,22 +182,26 @@ function () {
 
 
       if (this.x - this.radius <= 0) {
-        game.playerOne.addScore();
+        game.playerTwo.addScore();
         return this.reset(game);
       } // right paddle
 
 
       if (this.x + this.radius + this.dx > game.canvas.width) {
-        game.playerTwo.addScore();
+        game.playerOne.addScore();
         return this.reset(game);
       }
 
       if (_utils__WEBPACK_IMPORTED_MODULE_0___default.a.circleRectCollision(this.x, this.y, this.radius, game.rightPaddle.x, game.rightPaddle.y, game.rightPaddle.width + Math.abs(this.dx), game.rightPaddle.height)) {
+        game.playHit();
         this.dx = -this.dx;
+        this.incressSpeed();
       }
 
       if (_utils__WEBPACK_IMPORTED_MODULE_0___default.a.circleRectCollision(this.x, this.y, this.radius, game.leftPaddle.x, game.leftPaddle.y, game.leftPaddle.width + Math.abs(this.dx), game.leftPaddle.height)) {
+        game.playHit();
         this.dx = -this.dx;
+        this.incressSpeed();
       }
 
       this.y += this.dy;
@@ -188,6 +231,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ball__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ball */ "./src/js/ball.js");
 /* harmony import */ var _paddle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./paddle */ "./src/js/paddle.js");
 /* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./player */ "./src/js/player.js");
+/* harmony import */ var _assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/hit.mp3 */ "./src/assets/hit.mp3");
+/* harmony import */ var _assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/end-of-game.mp3 */ "./src/assets/end-of-game.mp3");
+
+
 
 
 
@@ -224,10 +271,12 @@ addEventListener('resize', function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
   Game.init();
-}); // addEventListener('click', () => {
-//     Game.init();
-// });
-
+});
+document.querySelector('.start').addEventListener('click', function (e) {
+  Game.init();
+  Game.animate();
+  e.target.classList.remove('is-active');
+});
 addEventListener('keydown', function (event) {
   if (event.isComposing || event.keyCode === 229) {
     return;
@@ -293,7 +342,14 @@ addEventListener('keyup', function (event) {
 
 });
 
+Game.playHit = function () {
+  var audio = new Audio(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  audio.play();
+};
+
 Game.reset = function () {
+  var audio = new Audio(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  audio.play();
   var dx = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(4.5, 6.5);
   var direction = Game.direction ? -dx : dx;
   Game.direction = Game.direction ? false : true;
@@ -337,9 +393,6 @@ Game.animate = function () {
   Game.playerOne.update(Game);
   Game.playerTwo.update(Game);
 };
-
-Game.init();
-Game.animate();
 
 /***/ }),
 
@@ -471,10 +524,7 @@ function () {
     }
   }, {
     key: "automate",
-    value: function automate(game) {
-      if (game.ball.x < game.canvas.width / 100 * 80) {
-        game.leftPaddle.y = +game.ball.y * 0.80;
-      }
+    value: function automate(game) {//game.leftPaddle.y =+ game.ball.y * 0.95;
     }
   }]);
 
@@ -517,7 +567,7 @@ var utils = {
     else if (cy > ry + rh) testY = ry + rh; // bottom edge
     // get distance from closest edges
 
-    distance = this.distance(testX, testY, cx, cy); // if the distance is less than the radius, collision!
+    var distance = this.distance(testX, testY, cx, cy); // if the distance is less than the radius, collision!
 
     if (distance <= radius) {
       return true;

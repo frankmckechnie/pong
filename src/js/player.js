@@ -23,9 +23,7 @@ class Player{
     }
 
     automate(game){
-        if(game.ball.x < (game.canvas.width / 100 * 80 ) ){
-            game.leftPaddle.y =+ game.ball.y * 0.80;
-        }
+        game.leftPaddle.y =+ game.ball.y * 0.95;
     }
 
 

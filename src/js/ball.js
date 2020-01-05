@@ -24,6 +24,21 @@ class Ball {
         game.reset();
     }
 
+    incressSpeed(){
+        // if(this.dx >=  Math.abs(7)){
+        //     this.dx = 7;
+        // }else{
+        //     this.dx += 0.5;
+        // }
+
+        // if(this.dy >= Math.abs(7)){
+        //     this.dy = 7;
+        // }else{
+        //     this.dy += 0.5;
+        // }
+
+    }
+
     update(game) {
 
 
@@ -33,30 +48,32 @@ class Ball {
 
         // left paddle
         if(this.x - this.radius <= 0){
-            game.playerOne.addScore();
+            game.playerTwo.addScore();
             return this.reset(game);
         }
 
         // right paddle
         if(this.x + this.radius + this.dx > game.canvas.width) {
-            game.playerTwo.addScore();
+            game.playerOne.addScore();
             return this.reset(game);
         } 
 
         if(utils.circleRectCollision(this.x, this.y, this.radius, game.rightPaddle.x,  game.rightPaddle.y, game.rightPaddle.width + Math.abs(this.dx), game.rightPaddle.height) ){
+            game.playHit();
             this.dx = -this.dx;
+            this.incressSpeed();
         }
 
         if(utils.circleRectCollision(this.x, this.y, this.radius, game.leftPaddle.x,  game.leftPaddle.y, game.leftPaddle.width + Math.abs(this.dx), game.leftPaddle.height)){
+            game.playHit();
             this.dx = -this.dx;
+            this.incressSpeed();
         }
 
         this.y += this.dy;
         this.x += this.dx;
         this.draw(game.c);
 
-
-        
     }
 }
 

@@ -6,13 +6,41 @@
     <style>
       body {
         margin: 0;
+        font-family: sans-serif;
       }
       canvas{
         display: block;
       }
+
+      .start{
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 237.5px);
+        color: black;
+        border: 1px solid #ff7100;
+        padding: 20px;
+        display: none;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        background-color: white;
+        font-weight: bold;
+      }
+
+      .start:hover{
+        background-color: #ff7100;
+        color: white;
+      }
+
+      .start.is-active{
+        display: block
+      }
     </style>
   <link rel="shortcut icon" href="favicon.ico"></head>
   <body>
+
+    <div class="start is-active">
+      Toss a pong to Your paddle, oh valley of plenty! aka start 
+    </div>
     <canvas></canvas>
   <script type="text/javascript" src="./js/canvas.bundle.js"></script></body>
 </html>

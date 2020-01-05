@@ -3,6 +3,8 @@ import Ball from './ball';
 import Paddle from './paddle';
 import Player from './player';
 
+import hit from '../assets/hit.mp3';
+import end from '../assets/end-of-game.mp3';
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
@@ -46,9 +48,12 @@ addEventListener('resize', () => {
     Game.init();
 });
 
-// addEventListener('click', () => {
-//     Game.init();
-// });
+document.querySelector('.start').addEventListener('click', (e) => {
+    Game.init();
+    Game.animate();
+
+    e.target.classList.remove('is-active');
+});
 
 addEventListener('keydown', event => {
     if (event.isComposing || event.keyCode === 229) {
@@ -101,8 +106,15 @@ addEventListener('keyup', event => {
     // do something
 });
 
+Game.playHit = () => {
+    let audio = new Audio(hit);
+    audio.play();
+};
 
 Game.reset = () => {
+
+    let audio = new Audio(end);
+    audio.play();
 
     let dx =  utils.randomIntFromRange(4.5, 6.5);
     let direction =  (Game.direction) ? -dx : dx;
@@ -156,6 +168,3 @@ Game.animate = () => {
     Game.playerOne.update(Game);
     Game.playerTwo.update(Game);
 };
-
-Game.init();
-Game.animate();

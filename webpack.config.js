@@ -19,6 +19,14 @@ module.exports = {
             presets: ['@babel/preset-env']
           },
         } , 'eslint-loader']
+      },
+      {
+        test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       }
     ]
   },
