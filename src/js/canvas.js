@@ -51,8 +51,8 @@ Game.init = () => {
         radius: radius,
         x: utils.randomIntFromRange(radius, canvas.width - radius),
         y: utils.randomIntFromRange(0, canvas.height - radius),
-        dx: utils.randomIntFromRange(-2,2),
-        dy: utils.randomIntFromRange(-2,2),
+        dx: 4,
+        dy: 4,
         color: utils.randomColor(colors)
     }
     Game.ball = new Ball(bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);

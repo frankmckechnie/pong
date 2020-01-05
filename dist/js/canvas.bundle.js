@@ -201,8 +201,8 @@ Game.init = function () {
     radius: radius,
     x: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(radius, canvas.width - radius),
     y: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(0, canvas.height - radius),
-    dx: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(-2, 2),
-    dy: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(-2, 2),
+    dx: 4,
+    dy: 4,
     color: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors)
   };
   Game.ball = new _ball__WEBPACK_IMPORTED_MODULE_1__["default"](bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
