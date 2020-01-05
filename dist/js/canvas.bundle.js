@@ -86,6 +86,70 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/ball.js":
+/*!************************!*\
+  !*** ./src/js/ball.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// Objects
+var Ball =
+/*#__PURE__*/
+function () {
+  function Ball(x, y, dx, dy, radius, color) {
+    _classCallCheck(this, Ball);
+
+    this.x = x;
+    this.y = y;
+    this.dy = dy;
+    this.dx = dx;
+    this.radius = radius;
+    this.color = color;
+  }
+
+  _createClass(Ball, [{
+    key: "draw",
+    value: function draw(c) {
+      c.beginPath();
+      c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      c.fillStyle = this.color;
+      c.fill();
+      c.stroke();
+      c.closePath();
+    }
+  }, {
+    key: "update",
+    value: function update(game) {
+      if (this.y + this.radius + this.dy > game.canvas.height || this.y - this.radius <= 0) {
+        this.dy = -this.dy;
+      }
+
+      if (this.x + this.radius + this.dx > game.canvas.width || this.x - this.radius <= 0) {
+        this.dx = -this.dx;
+      }
+
+      this.y += this.dy;
+      this.x += this.dx;
+      this.draw(game.c);
+    }
+  }]);
+
+  return Ball;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Ball);
+
+/***/ }),
+
 /***/ "./src/js/canvas.js":
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
@@ -97,11 +161,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+/* harmony import */ var _ball__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ball */ "./src/js/ball.js");
 
 
 var canvas = document.querySelector('canvas');
@@ -127,84 +187,36 @@ addEventListener('resize', function () {
 });
 addEventListener('click', function () {
   init();
-}); // Objects
+}); // Implementation
 
-var Ball =
-/*#__PURE__*/
-function () {
-  function Ball(x, y, dx, dy, radius, color) {
-    _classCallCheck(this, Ball);
+var Game = {
+  ball: undefined,
+  c: c,
+  canvas: canvas
+};
 
-    this.x = x;
-    this.y = y;
-    this.dy = dy;
-    this.dx = dx;
-    this.radius = radius;
-    this.color = color;
-  }
-
-  _createClass(Ball, [{
-    key: "draw",
-    value: function draw() {
-      c.beginPath();
-      c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      c.fillStyle = this.color;
-      c.fill();
-      c.stroke();
-      c.closePath();
-    }
-  }, {
-    key: "update",
-    value: function update() {
-      if (this.y + this.radius + this.dy > canvas.height) {
-        this.dy = -this.dy * friction;
-      } else {
-        this.dy += gravity;
-      }
-
-      if (this.x + this.radius + this.dx > canvas.width || this.x - this.radius <= 0) {
-        this.dx = -this.dx;
-      }
-
-      this.y += this.dy;
-      this.x += this.dx;
-      this.draw();
-    }
-  }]);
-
-  return Ball;
-}(); // Implementation
+Game.init = function () {
+  var radius = 10;
+  var bConf = {
+    radius: radius,
+    x: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(radius, canvas.width - radius),
+    y: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(0, canvas.height - radius),
+    dx: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(-2, 2),
+    dy: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(-2, 2),
+    color: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors)
+  };
+  Game.ball = new _ball__WEBPACK_IMPORTED_MODULE_1__["default"](bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
+}; // Animation Loop
 
 
-var ballArray = [];
-
-function init() {
-  ballArray = [];
-
-  for (var i = 0; i < 100; i++) {
-    var radius = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(20, 40);
-    var x = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(radius, canvas.width - radius);
-    var y = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(0, canvas.height - radius);
-    var dx = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(-2, 2);
-    var dy = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(-2, 2);
-    var color = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors);
-    ballArray.push(new Ball(x, y, dx, dy, radius, color));
-  }
-} // Animation Loop
-
-
-function animate() {
-  requestAnimationFrame(animate);
+Game.animate = function () {
+  requestAnimationFrame(Game.animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  c.fillText('yolo', mouse.x, mouse.y); // data.innerHTML = 'dy: ' + ball.dy + '<br> y:' + ball.y + '<br>x:' + ball.x ;
+  Game.ball.update(Game);
+};
 
-  ballArray.forEach(function (object) {
-    object.update();
-  });
-}
-
-init();
-animate();
+Game.init();
+Game.animate();
 
 /***/ }),
 
