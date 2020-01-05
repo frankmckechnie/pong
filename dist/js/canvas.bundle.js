@@ -248,7 +248,7 @@ var mouse = {
   y: innerHeight / 2
 };
 var colors = ['#2185C5', '#7ECEFD', '#FF7F66'];
-var backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5'];
+var backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF'];
 var backgroundGradient = c.createLinearGradient(0, 0, 0, canvas.height);
 backgroundGradient.addColorStop(0, _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(backgrounds)); // Implementation
 
@@ -524,7 +524,8 @@ function () {
     }
   }, {
     key: "automate",
-    value: function automate(game) {//game.leftPaddle.y =+ game.ball.y * 0.95;
+    value: function automate(game) {
+      game.leftPaddle.y = +game.ball.y * 0.95;
     }
   }]);
 

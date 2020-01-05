@@ -18,7 +18,7 @@ const mouse = {
 };
 
 const colors = ['#2185C5', '#7ECEFD', '#FF7F66'];
-const backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5'];
+const backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF'];
 
 let backgroundGradient = c.createLinearGradient(0,0,0, canvas.height);
 backgroundGradient.addColorStop(0,utils.randomColor(backgrounds));
