@@ -1,3 +1,4 @@
+import utils from './utils';
 
 // Objects
 class Ball {
@@ -19,6 +20,10 @@ class Ball {
         c.closePath();
     }
 
+    reset(game){
+        game.reset();
+    }
+
     update(game) {
 
 
@@ -26,13 +31,32 @@ class Ball {
             this.dy = -this.dy;
         }
 
-        if(this.x + this.radius + this.dx > game.canvas.width || this.x - this.radius <= 0){
+        // left paddle
+        if(this.x - this.radius <= 0){
+            game.playerOne.addScore();
+            return this.reset(game);
+        }
+
+        // right paddle
+        if(this.x + this.radius + this.dx > game.canvas.width) {
+            game.playerTwo.addScore();
+            return this.reset(game);
+        } 
+
+        if(utils.circleRectCollision(this.x, this.y, this.radius, game.rightPaddle.x,  game.rightPaddle.y, game.rightPaddle.width + Math.abs(this.dx), game.rightPaddle.height) ){
+            this.dx = -this.dx;
+        }
+
+        if(utils.circleRectCollision(this.x, this.y, this.radius, game.leftPaddle.x,  game.leftPaddle.y, game.leftPaddle.width + Math.abs(this.dx), game.leftPaddle.height)){
             this.dx = -this.dx;
         }
 
         this.y += this.dy;
         this.x += this.dx;
         this.draw(game.c);
+
+
+        
     }
 }
 

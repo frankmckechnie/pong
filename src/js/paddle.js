@@ -8,6 +8,9 @@ class Paddle {
         this.width = width;
         this.height = height;
         this.color = color;
+        this.up = false;
+        this.down = false;
+        this.border = 10;
     }
 
     draw(c) {
@@ -19,35 +22,27 @@ class Paddle {
         c.closePath();
     }
 
-    up(){
-        if(this.y - this.height <= 0){
-            this.dy = -this.dy;
-        }
-
-        this.y += this.dy;
+    moveUp(){
+        if(!this.up) return;
+        if(this.y - this.dy - this.border <= 0){
+            return this.y = 0 + this.border;
+        } 
+        this.y += -this.dy;
     }
 
-    down(game){
-        if(this.y + this.height > game.canvas.height){
-            this.dy = -this.dy;
-        }
-
+    moveDown(game){
+        if(!this.down) return; 
+        if(this.y + (this.height + this.dy + this.border) >= game.canvas.height){
+            return this.y = game.canvas.height - this.height - this.border;
+        }       
         this.y += this.dy;
     }
 
     update(game) {
 
-
-        // if(this.y + this.radius + this.dy > game.canvas.height || this.y - this.radius <= 0){
-        //     this.dy = -this.dy;
-        // }
-
-        // if(this.x + this.radius + this.dx > game.canvas.width || this.x - this.radius <= 0){
-        //     this.dx = -this.dx;
-        // }
-
-        // this.y += this.dy;
-        // this.x += this.dx;
+        this.moveUp(game);
+        this.moveDown(game);
+    
         this.draw(game.c);
     }
 }

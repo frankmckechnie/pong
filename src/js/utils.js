@@ -1,16 +1,39 @@
-function randomIntFromRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
-function randomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
+const utils = {
+    randomIntFromRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    randomColor(colors) {
+        return colors[Math.floor(Math.random() * colors.length)];
+    },
+    distance(x1, y1, x2, y2) {
+        const xDist = x2 - x1;
+        const yDist = y2 - y1;
 
-function distance(x1, y1, x2, y2) {
-    const xDist = x2 - x1;
-    const yDist = y2 - y1;
+        return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+    },
+    // CIRCLE/RECTANGLE
+    circleRectCollision(cx, cy, radius, rx, ry, rw, rh) {
 
-    return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
+        // temporary variables to set edges for testing
+        let testX = cx;
+        let testY = cy;
+    
+        // which edge is closest?
+        if (cx < rx)         testX = rx;      // test left edge
+        else if (cx > rx+rw) testX = rx+rw;   // right edge
+        if (cy < ry)         testY = ry;      // top edge
+        else if (cy > ry+rh) testY = ry+rh;   // bottom edge
+    
+        // get distance from closest edges
+        let distance = this.distance(testX, testY, cx, cy);
+    
+        // if the distance is less than the radius, collision!
+        if (distance <= radius) {
+            return true;
+        }
+        return false;
+    }
+};
 
-module.exports = { randomIntFromRange, randomColor, distance };
+module.exports = utils;
