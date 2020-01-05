@@ -162,6 +162,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ball__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ball */ "./src/js/ball.js");
+/* harmony import */ var _paddle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./paddle */ "./src/js/paddle.js");
+
 
 
 var canvas = document.querySelector('canvas');
@@ -172,9 +174,15 @@ var mouse = {
   x: innerWidth / 2,
   y: innerHeight / 2
 };
-var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
-var gravity = 1;
-var friction = 0.88; // Event Listeners
+var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']; // Implementation
+
+var Game = {
+  ball: undefined,
+  c: c,
+  canvas: canvas,
+  leftPaddle: undefined,
+  rightPaddle: undefined
+}; // Event Listeners
 
 addEventListener('mousemove', function (event) {
   mouse.x = event.clientX;
@@ -183,17 +191,39 @@ addEventListener('mousemove', function (event) {
 addEventListener('resize', function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
-  init();
+  Game.init();
 });
 addEventListener('click', function () {
-  init();
-}); // Implementation
+  Game.init();
+});
+addEventListener("keydown", function (event) {
+  if (event.isComposing || event.keyCode === 229) {
+    return;
+  }
 
-var Game = {
-  ball: undefined,
-  c: c,
-  canvas: canvas
-};
+  switch (event.keyCode) {
+    case 37:
+      // left
+      break;
+
+    case 38:
+      // up
+      break;
+
+    case 39:
+      // right
+      break;
+
+    case 40:
+      // down
+      break;
+
+    default:
+      return;
+    // exit this handler for other keys
+  } // do something
+
+});
 
 Game.init = function () {
   var radius = 10;
@@ -206,6 +236,8 @@ Game.init = function () {
     color: _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors)
   };
   Game.ball = new _ball__WEBPACK_IMPORTED_MODULE_1__["default"](bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
+  Game.leftPaddle = new _paddle__WEBPACK_IMPORTED_MODULE_2__["default"](10, canvas.height / 2, 20, 40, 5, _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors));
+  Game.rightPaddle = new _paddle__WEBPACK_IMPORTED_MODULE_2__["default"](canvas.width - 10, canvas.height / 2, 20, 40, 5, _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors));
 }; // Animation Loop
 
 
@@ -213,10 +245,92 @@ Game.animate = function () {
   requestAnimationFrame(Game.animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
   Game.ball.update(Game);
+  Game.leftPaddle.update(Game);
+  Game.rightPaddle.update(Game);
 };
 
 Game.init();
 Game.animate();
+
+/***/ }),
+
+/***/ "./src/js/paddle.js":
+/*!**************************!*\
+  !*** ./src/js/paddle.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// Objects
+var Paddle =
+/*#__PURE__*/
+function () {
+  function Paddle(x, y, width, height, dy, color) {
+    _classCallCheck(this, Paddle);
+
+    this.x = x;
+    this.y = y;
+    this.dy = dy;
+    this.width = width;
+    this.height = height;
+    this.color = color;
+  }
+
+  _createClass(Paddle, [{
+    key: "draw",
+    value: function draw(c) {
+      c.beginPath();
+      c.rect(this.x, this.y, this.width, this.height);
+      c.fillStyle = this.color;
+      c.fill();
+      c.stroke();
+      c.closePath();
+    }
+  }, {
+    key: "up",
+    value: function up(game) {
+      if (this.y - this.height <= 0) {
+        this.dy = -this.dy;
+      }
+
+      this.y += this.dy;
+    }
+  }, {
+    key: "down",
+    value: function down(game) {
+      if (this.y + this.height > game.canvas.height) {
+        this.dy = -this.dy;
+      }
+
+      this.y += this.dy;
+    }
+  }, {
+    key: "update",
+    value: function update(game) {
+      // if(this.y + this.radius + this.dy > game.canvas.height || this.y - this.radius <= 0){
+      //     this.dy = -this.dy;
+      // }
+      // if(this.x + this.radius + this.dx > game.canvas.width || this.x - this.radius <= 0){
+      //     this.dx = -this.dx;
+      // }
+      // this.y += this.dy;
+      // this.x += this.dx;
+      this.draw(game.c);
+    }
+  }]);
+
+  return Paddle;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Paddle);
 
 /***/ }),
 

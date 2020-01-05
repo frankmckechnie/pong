@@ -1,5 +1,7 @@
 import utils from './utils';
 import Ball from './ball';
+import Paddle from './paddle';
+
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
@@ -14,8 +16,14 @@ const mouse = {
 
 const colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
 
-const gravity = 1;
-const friction = 0.88;
+// Implementation
+const Game = {
+    ball: undefined,
+    c: c,
+    canvas: canvas,
+    leftPaddle: undefined,
+    rightPaddle: undefined
+};
 
 // Event Listeners
 addEventListener('mousemove', (event) => {
@@ -27,21 +35,37 @@ addEventListener('resize', () => {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
 
-    init();
+    Game.init();
 });
 
 addEventListener('click', () => {
-    init();
+    Game.init();
+});
+
+addEventListener('keydown', event => {
+    if (event.isComposing || event.keyCode === 229) {
+        return;
+    }
+
+    switch(event.keyCode) {
+    case 37: // left
+        break;
+
+    case 38: // up
+        break;
+
+    case 39: // right
+        break;
+
+    case 40: // down
+        break;
+
+    default: return; // exit this handler for other keys
+    }
+// do something
 });
 
 
-
-// Implementation
-const Game = {
-    ball: undefined,
-    c: c,
-    canvas: canvas
-};
 
 Game.init = () => {
 
@@ -54,17 +78,23 @@ Game.init = () => {
         dx: 4,
         dy: 4,
         color: utils.randomColor(colors)
-    }
+    };
+
     Game.ball = new Ball(bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
     
-}
+    Game.leftPaddle = new Paddle(10, canvas.height / 2, 20, 40, 5, utils.randomColor(colors));
+    Game.rightPaddle = new Paddle(canvas.width - 10, canvas.height / 2, 20, 40, 5, utils.randomColor(colors));
+
+};
 
 // Animation Loop
 Game.animate = () => {
     requestAnimationFrame(Game.animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
     Game.ball.update(Game);
-}
+    Game.leftPaddle.update(Game);
+    Game.rightPaddle.update(Game);
+};
 
 Game.init();
 Game.animate();
