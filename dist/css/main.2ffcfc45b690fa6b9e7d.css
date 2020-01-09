@@ -1,0 +1,115 @@
+/*-------------
+-  Master css
+---------------*/
+/*-------------
+-  Variables
+---------------*/
+/*-------------
+-  mixins css
+---------------*/
+/*-------------
+-  Base css
+---------------*/
+body {
+  margin: 0;
+  font-size: 100%;
+  font-family: sans-serif;
+  background: #21232f; }
+
+* {
+  box-sizing: border-box; }
+
+canvas {
+  display: none;
+  width: 100%; }
+  canvas.is-active {
+    display: block; }
+
+/*-------------
+-  Game css
+---------------*/
+.game {
+  display: none; }
+  .game.is-active {
+    display: block; }
+  .game__inner {
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 5%;
+    padding-top: 1em;
+    text-align: center; }
+    @media screen and (min-width: 768px) {
+      .game__inner {
+        padding-left: 70px;
+        padding-right: 70px; } }
+  .game__title {
+    font-weight: 600;
+    font-size: 1.2em;
+    color: #ff8364;
+    margin: 1em 0; }
+  .game__controls {
+    width: 100%;
+    height: auto;
+    text-align: left;
+    border: 1px solid #ff8364;
+    cursor: pointer;
+    overflow: hidden; }
+    .game__controls img {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+      transition: transform 0.5s ease-in-out; }
+    .game__controls:hover > img {
+      transform: scale(1.5); }
+  .game__tag {
+    border-right: 1px solid #ff8364;
+    border-bottom: 1px solid #ff8364;
+    display: inline-block;
+    padding: 5px 20px;
+    color: #edf7fa; }
+  .game__button-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -0.5em; }
+  .game__button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0.5em;
+    padding: 1em;
+    border: 1px solid #ff8364;
+    border-radius: .3em;
+    flex-grow: 1;
+    transition: 0.5s all;
+    cursor: pointer; }
+    .game__button:hover {
+      background-color: #ff8364; }
+      .game__button:hover span:nth-of-type(2) {
+        color: black; }
+
+/*-------------
+-  Text hellpers css
+---------------*/
+.text {
+  font-size: 0.8em; }
+  .text--large {
+    font-size: 1em; }
+  .text--xl {
+    font-size: 1.5em; }
+  .text--small {
+    font-size: 0.6em; }
+  .text--bold {
+    font-weight: bold; }
+  .text--color-p {
+    color: #edf7fa; }
+  .text--color-s {
+    color: #5f6caf; }
+  .text--color-t {
+    color: #ffb677; }
+  .text--color-f {
+    color: #ff8364; }
+
+
+/*# sourceMappingURL=main.2ffcfc45b690fa6b9e7d.css.map*/

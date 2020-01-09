@@ -1,9 +1,12 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanObsoleteChunks  = require('webpack-clean-obsolete-chunks');
+
 
 module.exports = {
   mode: 'development',
-  entry: './src/js/canvas.js',
+  entry: ['./src/js/canvas.js', './src/scss/master.scss'],
   output: {
     path: __dirname + '/dist/',
     filename: './js/canvas.bundle.js'
@@ -21,13 +24,31 @@ module.exports = {
         } , 'eslint-loader']
       },
       {
+        // HTML LOADER
+        test: /\.html$/,
+        loader: 'html-loader'
+      },
+      {
         test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/i,
         use: [
           {
             loader: 'file-loader',
+            options: {
+              esModule: false,
+            }
           },
         ],
-      }
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader',
+          'sass-loader'
+        ],
+      },
     ]
   },
   plugins: [
@@ -38,10 +59,16 @@ module.exports = {
       files: ['./dist/*'],
       notify: false
     }),
+    new CleanObsoleteChunks({deep:true}),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       favicon: 'favicon.ico',
       template: 'src/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: '/css/[name].[hash].css',
+      chunkFilename: '[id].[hash].css',
+      ignoreOrder: false
     })
   ],
   watch: true,

@@ -23,7 +23,7 @@ class Player{
     }
 
     automate(game){
-        game.leftPaddle.y =+ game.ball.y * 0.95;
+        game.leftPaddle.y =+ game.ball.y * 0.87;
     }
 
 

@@ -17,14 +17,16 @@ const mouse = {
     y: innerHeight / 2
 };
 
-const colors = ['#2185C5', '#7ECEFD', '#FF7F66'];
-const backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF'];
+
+const colors = ['#2185C5', '#7ECEFD', '#FF7F66','#ff8364', '#ffb677'];
+const backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF','#21232f'];
 
 let backgroundGradient = c.createLinearGradient(0,0,0, canvas.height);
 backgroundGradient.addColorStop(0,utils.randomColor(backgrounds));
 
 // Implementation
 const Game = {
+    hook: document.querySelector('.game'),
     ball: undefined,
     c: c,
     canvas: canvas,
@@ -32,7 +34,8 @@ const Game = {
     rightPaddle: undefined,
     playerOne: undefined,
     playerTwo: undefined,
-    direction: true
+    direction: true,
+    computer: false
 };
 
 // Event Listeners
@@ -45,15 +48,25 @@ addEventListener('resize', () => {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
 
-    Game.init();
+    // Game.init();
 });
 
-document.querySelector('.start').addEventListener('click', (e) => {
+document.querySelector('.js-player-one').addEventListener('click', () => {
+    Game.computer = true;
     Game.init();
     Game.animate();
-
-    e.target.classList.remove('is-active');
+    Game.hook.classList.remove('is-active');
+    canvas.classList.add('is-active');
 });
+
+document.querySelector('.js-player-two').addEventListener('click', () => {
+    Game.init(false);
+    Game.animate();
+    Game.hook.classList.remove('is-active');
+    canvas.classList.add('is-active');
+});
+
+
 
 addEventListener('keydown', event => {
     if (event.isComposing || event.keyCode === 229) {
@@ -134,8 +147,6 @@ Game.reset = () => {
 
 Game.init = () => {
 
-
-
     let bConf = {
         radius: 10,
         x: canvas.width / 2,
@@ -149,7 +160,7 @@ Game.init = () => {
     Game.leftPaddle = new Paddle(10, canvas.height / 2, 20, 40, 8, utils.randomColor(colors));
     Game.rightPaddle = new Paddle(canvas.width - 30, canvas.height / 2, 20, 40, 8, utils.randomColor(colors));
     Game.playerOne = new Player('Computer', 0, 10, 50);
-    Game.playerOne.computer = true;
+    Game.playerOne.computer = Game.computer;
     Game.playerTwo = new Player('Frank', 0, canvas.width - 100, 50);
 
 };

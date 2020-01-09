@@ -1,0 +1,60 @@
+/*-------------
+-  Master css
+---------------*/
+/*-------------
+-  Variables
+---------------*/
+/*-------------
+-  mixins css
+---------------*/
+/*-------------
+-  Base css
+---------------*/
+body {
+  margin: 0;
+  font-family: sans-serif; }
+
+* {
+  box-sizing: border-box; }
+
+canvas {
+  display: block; }
+
+/*-------------
+-  Game css
+---------------*/
+.game__inner {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 5%; }
+  @media screen and (min-width: 768px) {
+    .game__inner {
+      padding-left: 70px;
+      padding-right: 70px; } }
+
+.game__title {
+  font-size: 2em;
+  color: #ff8364; }
+
+.game__controls {
+  width: 100%;
+  height: auto; }
+  .game__controls img {
+    width: 100%; }
+
+.game__button-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.game__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 1em;
+  border: 1px solid #ff8364;
+  border-radius: 1em;
+  flex-grow: 1; }
+
+
+/*# sourceMappingURL=main.4ee60a381e3841885c8e.css.map*/

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/canvas.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -90,12 +90,10 @@
 /*!************************************!*\
   !*** ./src/assets/end-of-game.mp3 ***!
   \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2fd02232b10907ecd763be4060f47292.mp3");
+module.exports = __webpack_require__.p + "2fd02232b10907ecd763be4060f47292.mp3";
 
 /***/ }),
 
@@ -103,12 +101,10 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************!*\
   !*** ./src/assets/hit.mp3 ***!
   \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c57f0316a295265790a11aab8261b04f.mp3");
+module.exports = __webpack_require__.p + "c57f0316a295265790a11aab8261b04f.mp3";
 
 /***/ }),
 
@@ -232,7 +228,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _paddle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./paddle */ "./src/js/paddle.js");
 /* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./player */ "./src/js/player.js");
 /* harmony import */ var _assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/hit.mp3 */ "./src/assets/hit.mp3");
+/* harmony import */ var _assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/end-of-game.mp3 */ "./src/assets/end-of-game.mp3");
+/* harmony import */ var _assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -247,12 +245,13 @@ var mouse = {
   x: innerWidth / 2,
   y: innerHeight / 2
 };
-var colors = ['#2185C5', '#7ECEFD', '#FF7F66'];
-var backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF'];
+var colors = ['#2185C5', '#7ECEFD', '#FF7F66', '#ff8364', '#ffb677'];
+var backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF', '#21232f'];
 var backgroundGradient = c.createLinearGradient(0, 0, 0, canvas.height);
 backgroundGradient.addColorStop(0, _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(backgrounds)); // Implementation
 
 var Game = {
+  hook: document.querySelector('.game'),
   ball: undefined,
   c: c,
   canvas: canvas,
@@ -260,7 +259,8 @@ var Game = {
   rightPaddle: undefined,
   playerOne: undefined,
   playerTwo: undefined,
-  direction: true
+  direction: true,
+  computer: false
 }; // Event Listeners
 
 addEventListener('mousemove', function (event) {
@@ -269,13 +269,20 @@ addEventListener('mousemove', function (event) {
 });
 addEventListener('resize', function () {
   canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  Game.init();
+  canvas.height = innerHeight; // Game.init();
 });
-document.querySelector('.start').addEventListener('click', function (e) {
+document.querySelector('.js-player-one').addEventListener('click', function (e) {
+  Game.computer = true;
   Game.init();
   Game.animate();
-  e.target.classList.remove('is-active');
+  Game.hook.classList.remove('is-active');
+  canvas.classList.add('is-active');
+});
+document.querySelector('.js-player-two').addEventListener('click', function (e) {
+  Game.init(false);
+  Game.animate();
+  Game.hook.classList.remove('is-active');
+  canvas.classList.add('is-active');
 });
 addEventListener('keydown', function (event) {
   if (event.isComposing || event.keyCode === 229) {
@@ -343,12 +350,12 @@ addEventListener('keyup', function (event) {
 });
 
 Game.playHit = function () {
-  var audio = new Audio(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  var audio = new Audio(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4___default.a);
   audio.play();
 };
 
 Game.reset = function () {
-  var audio = new Audio(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5__["default"]);
+  var audio = new Audio(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5___default.a);
   audio.play();
   var dx = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(4.5, 6.5);
   var direction = Game.direction ? -dx : dx;
@@ -377,7 +384,7 @@ Game.init = function () {
   Game.leftPaddle = new _paddle__WEBPACK_IMPORTED_MODULE_2__["default"](10, canvas.height / 2, 20, 40, 8, _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors));
   Game.rightPaddle = new _paddle__WEBPACK_IMPORTED_MODULE_2__["default"](canvas.width - 30, canvas.height / 2, 20, 40, 8, _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomColor(colors));
   Game.playerOne = new _player__WEBPACK_IMPORTED_MODULE_3__["default"]('Computer', 0, 10, 50);
-  Game.playerOne.computer = true;
+  Game.playerOne.computer = Game.computer;
   Game.playerTwo = new _player__WEBPACK_IMPORTED_MODULE_3__["default"]('Frank', 0, canvas.width - 100, 50);
 }; // Animation Loop
 
@@ -525,7 +532,7 @@ function () {
   }, {
     key: "automate",
     value: function automate(game) {
-      game.leftPaddle.y = +game.ball.y * 0.95;
+      game.leftPaddle.y = +game.ball.y * 0.87;
     }
   }]);
 
@@ -578,6 +585,30 @@ var utils = {
   }
 };
 module.exports = utils;
+
+/***/ }),
+
+/***/ "./src/scss/master.scss":
+/*!******************************!*\
+  !*** ./src/scss/master.scss ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 0:
+/*!*******************************************************!*\
+  !*** multi ./src/js/canvas.js ./src/scss/master.scss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./src/js/canvas.js */"./src/js/canvas.js");
+module.exports = __webpack_require__(/*! ./src/scss/master.scss */"./src/scss/master.scss");
+
 
 /***/ })
 
