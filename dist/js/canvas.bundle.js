@@ -269,7 +269,8 @@ addEventListener('mousemove', function (event) {
 });
 addEventListener('resize', function () {
   canvas.width = innerWidth;
-  canvas.height = innerHeight; // Game.init();
+  canvas.height = innerHeight; 
+  Game.init(Game.computer);
 });
 document.querySelector('.js-player-one').addEventListener('click', function (e) {
   Game.computer = true;
