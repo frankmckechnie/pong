@@ -47,8 +47,7 @@ addEventListener('mousemove', (event) => {
 addEventListener('resize', () => {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
-
-    // Game.init();
+    Game.init(Game.computer);
 });
 
 document.querySelector('.js-player-one').addEventListener('click', () => {
@@ -65,8 +64,6 @@ document.querySelector('.js-player-two').addEventListener('click', () => {
     Game.hook.classList.remove('is-active');
     canvas.classList.add('is-active');
 });
-
-
 
 addEventListener('keydown', event => {
     if (event.isComposing || event.keyCode === 229) {

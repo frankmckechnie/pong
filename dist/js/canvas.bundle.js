@@ -269,16 +269,17 @@ addEventListener('mousemove', function (event) {
 });
 addEventListener('resize', function () {
   canvas.width = innerWidth;
-  canvas.height = innerHeight; // Game.init();
+  canvas.height = innerHeight;
+  Game.init(Game.computer);
 });
-document.querySelector('.js-player-one').addEventListener('click', function (e) {
+document.querySelector('.js-player-one').addEventListener('click', function () {
   Game.computer = true;
   Game.init();
   Game.animate();
   Game.hook.classList.remove('is-active');
   canvas.classList.add('is-active');
 });
-document.querySelector('.js-player-two').addEventListener('click', function (e) {
+document.querySelector('.js-player-two').addEventListener('click', function () {
   Game.init(false);
   Game.animate();
   Game.hook.classList.remove('is-active');
