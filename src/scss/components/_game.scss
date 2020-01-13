@@ -3,13 +3,54 @@
 ---------------*/
 
 .game{
-
     display: none;
+    height: 100%;
 
     &.is-active{
-        display: block;
+        display: flex;
     }
-   
+
+    &__left{
+        position: fixed;
+        width: 35%;
+        background: $bg-color;
+        height: 100%;
+        padding: 1em 3%;
+        background-size: 99% 95%;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-image: url('https://media.giphy.com/media/35HTeYyUj5FPMUgVec/giphy.gif');
+    }
+
+    &__right{
+        margin-left: 35%;
+        width: 65%;
+        height: 100%;
+        padding: 2em 3%;
+
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(58,19,56,1) 35%, rgba(58,19,56,1) 100%);
+    }
+
+    &__logo{
+        font-size: 2.5em;
+        font-weight: 500;
+        font-family: 'K2D', sans-serif;
+
+        a{ 
+            color: $test-color; 
+        }
+
+        &:before{
+            content: '';
+            display:inline-block;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            background-color: $third-color;
+        }
+    }
+
     &__inner{
         @include inner;
 
@@ -19,30 +60,34 @@
 
     &__title{
         font-weight: 600;
-        font-size: 1.2em;
-        color: $forth-color;
-        margin: 1em 0;
+        font-size: 2.2em;
+        color: $third-color;
+        margin: 0 0 1em 0;
+        font-family: 'K2D', sans-serif;
+
     }
 
     &__controls{
         width: 100%;
         height: auto;
         text-align: left;
-        border: 1px solid $forth-color;
+        border-top: 1px solid $forth-color;
         cursor: pointer;
         overflow: hidden;
-
-        img{
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: auto;
-            transition: transform 0.5s ease-in-out;
-        }
+        margin: 0 0 1em 0;
 
         &:hover > img{
             transform: scale(1.5)
         }
+    }
+
+    &__image{
+        display: block;
+        width: 100%;
+        max-width: 600px;
+        max-height: 400px;
+        margin: auto;
+        transition: transform 0.5s ease-in-out;
     }
 
     &__tag{
@@ -53,35 +98,17 @@
         color: $primary-color;
     }
 
-    &__button-wrapper{
+    &-buttons{
+        overflow: hidden;
+    }
+
+    &-buttons__grid{
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-
         margin: 0 -0.5em;
-    }
-
-    &__button{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        margin: 0 0.5em;
         padding: 1em;
-
-        border: 1px solid $forth-color;
-        border-radius: .3em;
-        flex-grow: 1;
-
-        transition: 0.5s all;
-        cursor: pointer;
-
-        &:hover{
-            background-color: $forth-color;
-            span:nth-of-type(2){
-                color: black;
-            }
-        }
     }
+
 }
 

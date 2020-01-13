@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8" />
   <title>Canvas Pong | Webfrankly</title>
 </head>
@@ -10,29 +10,57 @@
 <body>
   <div class="game is-active">
 
-    <div class="game__inner">
+
+    <div class="game__left">
+
+      <div class="game__logo">
+        <a href="/">Pong</a>
+      </div>
+
+    </div>
+    <div class="game__right">
+
+      <!-- <div class="game__title text--color-p">
+        Toss a pong to Your paddle, oh valley of plenty!
+      </div> -->
+
       <div class="game__controls">
         <div class="game__tag">Controls</div>
-        <img src="assets/controls.png" alt="game controls" title='game controls'>
+        <img class="game__image" src="assets/controls.png" alt="game controls" title='game controls'>
       </div>
 
-      <div class="game__title text--color-p">
-          Toss a pong to Your paddle, oh valley of plenty!
-      </div>
+      <div class="game__controls">
+        <div class="game__tag">Game Modes</div>
 
-      <div class="game__button-wrapper">
-        <div class="game__button js-player-one">
-          <span class='text--xl text--color-p'>You</span>
-          <span class='text--small text--bold text--color-t'>VS</span>
-          <span class='text--xl text--color-p'>Computer</span>
-        </div>
-        <div class="game__button js-player-two">
-            <span class='text--xl text--color-p'>You</span>
-            <span class='text--small text--bold text--color-t'>VS</span>
-            <span class='text--xl text--color-p'>Friend</span>
+
+        <div class="game-buttons__grid">
+
+          <div class="button js-player-one">
+            <div class='button--grow text--xl text--color-p'>
+              <img src="./assets/man.svg" class="button--man" alt="">
+            </div>
+            <div class='button--grow text--xl text--bold'>Vs <br> Computer</div>
+            <div class='button--grow text--xl text--color-p'>
+              <img src="./assets/ai.svg" class="button--computer" alt="">
+            </div>
+
+          </div>
+
+          <div class="button js-player-two">
+            <div class='button--grow text--xl text--color-p'>
+              <img src="./assets/man.svg" class="button--man" alt="">
+            </div>
+            <div class='button--grow text--xl text--bold'>Vs <br> Friend</div>
+            <div class='button--grow text--xl text--color-p'>
+              <img src="./assets/man.svg" class="button--man" alt="">
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
+
+
   </div>
 
   <canvas></canvas>

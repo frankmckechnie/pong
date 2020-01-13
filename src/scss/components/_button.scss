@@ -1,0 +1,44 @@
+/*-------------
+-  Buttons css
+---------------*/
+
+.button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+
+    width: calc(50% - 1em);
+
+    margin: 0 0.5em;
+    padding: 1.5em;
+
+    border: 1px solid $forth-color;
+    border-radius: .3em;
+    flex-grow: 1;
+
+    transition: 0.5s all;
+    cursor: pointer;
+
+    color: $forth-color;
+
+    &--grow{
+        flex-grow: 1;
+    }
+
+    &--man, &--computer{
+        display: block;
+        width: auto;
+        max-width: 50%;
+        max-height: 100px;
+        margin: auto;
+    }
+
+    &:hover{
+        background-color: $forth-color;
+        color:  rgba(58,19,56,1);
+        span:nth-of-type(2){
+            color: black;
+        }
+    }
+}
