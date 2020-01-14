@@ -113,6 +113,56 @@ canvas {
     margin: 0 -0.5em;
     padding: 1em; }
 
+.game-options {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #ff8364; }
+  .game-options__title {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #ff8364; }
+  .game-options__item {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    .game-options__item input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer; }
+      .game-options__item input:checked ~ .game-options__checkmark {
+        background-color: #edf7fa; }
+    .game-options__item:hover input ~ .game-options__checkmark {
+      background-color: #5f6caf; }
+    .game-options__item input:checked ~ .game-options__checkmark {
+      background-color: #ff8364; }
+    .game-options__item input:checked ~ .game-options__checkmark:after {
+      display: block; }
+  .game-options__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #5f6caf;
+    border-radius: 50%; }
+    .game-options__checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #edf7fa; }
+
 /*-------------
 -  Buttons css
 ---------------*/
@@ -167,4 +217,4 @@ canvas {
     color: #ff8364; }
 
 
-/*# sourceMappingURL=main.51d709de31f01a4fe9bb.css.map*/
+/*# sourceMappingURL=main.dba0582e1451b0e0bbe3.css.map*/
