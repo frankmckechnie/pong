@@ -227,10 +227,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ball__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ball */ "./src/js/ball.js");
 /* harmony import */ var _paddle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./paddle */ "./src/js/paddle.js");
 /* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./player */ "./src/js/player.js");
-/* harmony import */ var _assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/hit.mp3 */ "./src/assets/hit.mp3");
-/* harmony import */ var _assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/end-of-game.mp3 */ "./src/assets/end-of-game.mp3");
-/* harmony import */ var _assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _options__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./options */ "./src/js/options.js");
+/* harmony import */ var _assets_hit_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/hit.mp3 */ "./src/assets/hit.mp3");
+/* harmony import */ var _assets_hit_mp3__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../assets/end-of-game.mp3 */ "./src/assets/end-of-game.mp3");
+/* harmony import */ var _assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -351,12 +353,12 @@ addEventListener('keyup', function (event) {
 });
 
 Game.playHit = function () {
-  var audio = new Audio(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_4___default.a);
+  var audio = new Audio(_assets_hit_mp3__WEBPACK_IMPORTED_MODULE_5___default.a);
   audio.play();
 };
 
 Game.reset = function () {
-  var audio = new Audio(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_5___default.a);
+  var audio = new Audio(_assets_end_of_game_mp3__WEBPACK_IMPORTED_MODULE_6___default.a);
   audio.play();
   var dx = _utils__WEBPACK_IMPORTED_MODULE_0___default.a.randomIntFromRange(4.5, 6.5);
   var direction = Game.direction ? -dx : dx;
@@ -372,7 +374,7 @@ Game.reset = function () {
   Game.ball = new _ball__WEBPACK_IMPORTED_MODULE_1__["default"](bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
 };
 
-Game.init = function () {
+Game.init = function (options) {
   var bConf = {
     radius: 10,
     x: canvas.width / 2,
@@ -401,6 +403,62 @@ Game.animate = function () {
   Game.playerOne.update(Game);
   Game.playerTwo.update(Game);
 };
+
+/***/ }),
+
+/***/ "./src/js/options.js":
+/*!***************************!*\
+  !*** ./src/js/options.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/**
+ * 
+ * Game Options
+ * 
+ */
+var Options =
+/*#__PURE__*/
+function () {
+  function Options(options) {
+    _classCallCheck(this, Options);
+  }
+
+  _createClass(Options, [{
+    key: "setLevel",
+    value: function setLevel(level) {
+      this.paddle = level.paddle;
+      this.velocity = level.velocity;
+    }
+  }]);
+
+  return Options;
+}();
+
+var options = {
+  easy: {
+    paddle: {
+      height: 200,
+      width: 200
+    },
+    velocity: {
+      x: 10,
+      y: 10
+    }
+  },
+  hard: {},
+  insane: {}
+};
+/* harmony default export */ __webpack_exports__["default"] = (options);
 
 /***/ }),
 

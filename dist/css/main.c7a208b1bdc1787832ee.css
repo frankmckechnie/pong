@@ -116,52 +116,57 @@ canvas {
 .game-options {
   margin: 1em;
   padding: 1em;
-  border: 1px solid #ff8364; }
+  border: 1px solid #ff8364;
+  display: inline-block; }
   .game-options__title {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 500;
-    color: #ff8364; }
+    color: #ff8364;
+    margin-bottom: 0.5em; }
   .game-options__item {
     display: block;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    padding-left: 25px;
+    margin-bottom: 10px;
     cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none; }
     .game-options__item input {
       position: absolute;
+      left: 0;
+      right: 0;
       opacity: 0;
-      cursor: pointer; }
+      cursor: pointer;
+      z-index: 11; }
       .game-options__item input:checked ~ .game-options__checkmark {
         background-color: #edf7fa; }
     .game-options__item:hover input ~ .game-options__checkmark {
-      background-color: #5f6caf; }
+      background-color: #ff8364; }
     .game-options__item input:checked ~ .game-options__checkmark {
       background-color: #ff8364; }
     .game-options__item input:checked ~ .game-options__checkmark:after {
       display: block; }
   .game-options__checkmark {
     position: absolute;
-    top: 0;
+    top: 2px;
     left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #5f6caf;
+    height: 15px;
+    width: 15px;
+    background-color: #edf7fa;
     border-radius: 50%; }
     .game-options__checkmark:after {
       content: "";
       position: absolute;
       display: none;
-      top: 9px;
-      left: 9px;
-      width: 8px;
-      height: 8px;
+      top: 5px;
+      left: 5px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: #edf7fa; }
+  .game-options label {
+    color: #edf7fa;
+    font-size: 0.8em;
+    cursor: pointer; }
 
 /*-------------
 -  Buttons css
@@ -200,7 +205,7 @@ canvas {
 .text {
   font-size: 0.8em; }
   .text--large {
-    font-size: 1em; }
+    font-size: 1.2em; }
   .text--xl {
     font-size: 1.5em; }
   .text--small {
@@ -217,4 +222,4 @@ canvas {
     color: #ff8364; }
 
 
-/*# sourceMappingURL=main.dba0582e1451b0e0bbe3.css.map*/
+/*# sourceMappingURL=main.c7a208b1bdc1787832ee.css.map*/

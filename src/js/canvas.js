@@ -2,6 +2,7 @@ import utils from './utils';
 import Ball from './ball';
 import Paddle from './paddle';
 import Player from './player';
+import options from './options';
 
 import hit from '../assets/hit.mp3';
 import end from '../assets/end-of-game.mp3';
@@ -142,7 +143,7 @@ Game.reset = () => {
     Game.ball = new Ball(bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
 };
 
-Game.init = () => {
+Game.init = (options) => {
 
     let bConf = {
         radius: 10,
