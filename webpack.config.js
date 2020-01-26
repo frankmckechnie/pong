@@ -9,7 +9,7 @@ module.exports = {
   entry: ['./src/js/canvas.js', './src/scss/master.scss'],
   output: {
     path: __dirname + '/dist/',
-    filename: "/js/[name].bundle.js",
+    filename: "js/[name].bundle.js",
   },
   module: {
     rules: [
@@ -65,8 +65,8 @@ module.exports = {
       template: 'src/index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: '/css/[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: '/css/main.css',
+      chunkFilename: 'main.css',
       ignoreOrder: false
     }),
     new CleanWebpackPlugin()
