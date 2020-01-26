@@ -20,13 +20,19 @@
         background-repeat: no-repeat;
         background-position: center bottom;
         background-image: url('https://media.giphy.com/media/35HTeYyUj5FPMUgVec/giphy.gif');
+        transform: skewY(-1.5deg);
+
     }
 
     &__right {
+        position: fixed;
+        overflow-y:auto;
         margin-left: 35%;
         width: 65%;
         height: 100%;
         padding: 2em 3%;
+        transform: skewY(1.5deg);
+
 
         background: rgb(2, 0, 36);
         background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(58, 19, 56, 1) 70%, rgba(58, 19, 56, 1) 100%);
