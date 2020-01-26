@@ -28,7 +28,7 @@ const options ={
     insane:{
         
     }
-} 
+}; 
 
 
 

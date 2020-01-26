@@ -1,7 +1,7 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanObsoleteChunks  = require('webpack-clean-obsolete-chunks');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 module.exports = {
@@ -52,6 +52,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
@@ -59,7 +60,6 @@ module.exports = {
       files: ['./dist/*'],
       notify: false
     }),
-    new CleanObsoleteChunks({deep:true}),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       favicon: 'favicon.ico',
