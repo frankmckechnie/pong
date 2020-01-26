@@ -9,7 +9,7 @@ module.exports = {
   entry: ['./src/js/canvas.js', './src/scss/master.scss'],
   output: {
     path: __dirname + '/dist/',
-    filename: './js/canvas.bundle.js'
+    filename: "/js/[name].bundle.js",
   },
   module: {
     rules: [
@@ -52,7 +52,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
@@ -69,7 +68,8 @@ module.exports = {
       filename: '/css/[name].[hash].css',
       chunkFilename: '[id].[hash].css',
       ignoreOrder: false
-    })
+    }),
+    new CleanWebpackPlugin()
   ],
   watch: true,
   devtool: 'source-map'
