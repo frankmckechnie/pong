@@ -2,7 +2,7 @@ import utils from './utils';
 import Ball from './ball';
 import Paddle from './paddle';
 import Player from './player';
-import options from './options';
+//import options from './options';
 
 import hit from '../assets/hit.mp3';
 import end from '../assets/end-of-game.mp3';
@@ -51,20 +51,20 @@ addEventListener('resize', () => {
     Game.init(Game.computer);
 });
 
-document.querySelector('.js-player-one').addEventListener('click', () => {
-    Game.computer = true;
-    Game.init();
-    Game.animate();
-    Game.hook.classList.remove('is-active');
-    canvas.classList.add('is-active');
-});
+// document.querySelector('.js-player-one').addEventListener('click', () => {
+//     Game.computer = true;
+//     Game.init();
+//     Game.animate();
+//     Game.hook.classList.remove('is-active');
+//     canvas.classList.add('is-active');
+// });
 
-document.querySelector('.js-player-two').addEventListener('click', () => {
-    Game.init(false);
-    Game.animate();
-    Game.hook.classList.remove('is-active');
-    canvas.classList.add('is-active');
-});
+// document.querySelector('.js-player-two').addEventListener('click', () => {
+//     Game.init(false);
+//     Game.animate();
+//     Game.hook.classList.remove('is-active');
+//     canvas.classList.add('is-active');
+// });
 
 addEventListener('keydown', event => {
     if (event.isComposing || event.keyCode === 229) {
@@ -143,7 +143,7 @@ Game.reset = () => {
     Game.ball = new Ball(bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
 };
 
-Game.init = (options) => {
+Game.init = () => {
 
     let bConf = {
         radius: 10,

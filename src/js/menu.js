@@ -10,7 +10,7 @@ class Menu {
 
     constructor(selector, hooks){
         this.menu = document.querySelector(selector);
-
+        console.log(hooks, this.menu);
         // gameMode
         // gameLevel
 
@@ -18,6 +18,8 @@ class Menu {
 
     getOptions(){
         let options = this.menu.querySelectorAll('.js-options');
+        console.log(options);
+
     }
 
 
@@ -26,5 +28,5 @@ class Menu {
 
 
 const menu = new Menu('.js-menu');
-
+menu.getOptions();
 
