@@ -19,9 +19,14 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: center;
         text-align: center;
         padding: 1.5em;
         flex-grow: 1;
+
+        &--padding{
+            padding: .5em;
+        }
     }
 
     &__radio{
@@ -36,7 +41,7 @@
 
     &__inner:hover,  &__radio:checked ~ &__inner, &__radio:hover ~ &__inner{
         background-color: $forth-color;
-        color:  rgba(58,19,56,1);
+        color: $fith-color;
         span:nth-of-type(2){
             color: black;
         }
@@ -64,5 +69,12 @@
         max-width: 50%;
         max-height: 100px;
         margin: auto;
+    }
+
+    &--ball{
+        background-color: $forth-color;
+        color: $primary-color;
+        width: $font-size;
+        height: $font-size;
     }
 }

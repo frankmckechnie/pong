@@ -12,7 +12,7 @@
 
     &__left {
         position: fixed;
-        width: 35%;
+        width: 31%;
         background: $bg-color;
         height: 100%;
         padding: 1em 3%;
@@ -25,13 +25,13 @@
     &__right {
         position: fixed;
         overflow-y:auto;
-        margin-left: 35%;
-        width: 65%;
+        margin-left: 30%;
+        width: 70%;
         height: 100%;
-        padding: 2em 3%;
+        padding: 2em 3% 2em 0;
 
-
-        background: rgb(2, 0, 36);
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 3% 100%);
+        background: $secondary-color;
         background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(58, 19, 56, 1) 70%, rgba(58, 19, 56, 1) 100%);
     }
 
@@ -78,6 +78,7 @@
         cursor: pointer;
         overflow: hidden;
         margin: 0 0 1em 0;
+        padding-left: 5%;
 
         &:hover>img {
             transform: scale(1.5)
@@ -113,4 +114,7 @@
         padding: 1em;
     }
 
+    &__start{
+        padding-left: 5%;
+    }
 }
