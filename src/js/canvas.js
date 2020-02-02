@@ -2,7 +2,7 @@ import utils from './utils';
 import Ball from './ball';
 import Paddle from './paddle';
 import Player from './player';
-//import options from './options';
+import options from './options';
 
 import hit from '../assets/hit.mp3';
 import end from '../assets/end-of-game.mp3';
@@ -36,7 +36,11 @@ const Game = {
     playerOne: undefined,
     playerTwo: undefined,
     direction: true,
-    computer: false
+    computer: false,
+    fields: {
+        LEVEL:'level', 
+        PLAYER: 'player'
+    }
 };
 
 // Event Listeners
@@ -59,12 +63,17 @@ addEventListener('resize', () => {
 //     canvas.classList.add('is-active');
 // });
 
-// document.querySelector('.js-player-two').addEventListener('click', () => {
-//     Game.init(false);
-//     Game.animate();
-//     Game.hook.classList.remove('is-active');
-//     canvas.classList.add('is-active');
-// });
+document.getElementById('js-game-options').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const level = formData.get(Game.fields.LEVEL);
+    const player = formData.get(Game.fields.PLAYER);
+    
+    const options = new Options(level, player);
+    Game.init(options);
+    Game.animate();
+});
 
 addEventListener('keydown', event => {
     if (event.isComposing || event.keyCode === 229) {
@@ -143,24 +152,23 @@ Game.reset = () => {
     Game.ball = new Ball(bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
 };
 
-Game.init = () => {
+Game.init = (options) => {
 
-    let bConf = {
-        radius: 10,
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        dx: utils.randomIntFromRange(4.5, 6.5),
-        dy: utils.randomIntFromRange(4, 6.5),
-        color: utils.randomColor(colors)
-    };
+    const ball = options.level.ball;
+    const paddle = options.level.paddel;
+    const wHalf =  canvas.width / 2;
+    const hHalf =  canvas.height / 2;
 
-    Game.ball = new Ball(bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
-    Game.leftPaddle = new Paddle(10, canvas.height / 2, 20, 40, 8, utils.randomColor(colors));
-    Game.rightPaddle = new Paddle(canvas.width - 30, canvas.height / 2, 20, 40, 8, utils.randomColor(colors));
+    Game.ball = new Ball(wHalf, hHalf, ball.velocity.x, ball.velocity.y, ball.radius, utils.randomColor(colors));
+    Game.leftPaddle = new Paddle(10, hHalf, paddle.width, paddle.height, paddle.speed, utils.randomColor(colors));
+    Game.rightPaddle = new Paddle(canvas.width - 30, hHalf, paddle.width, paddle.height, paddle.speed, utils.randomColor(colors));
+    
     Game.playerOne = new Player('Computer', 0, 10, 50);
     Game.playerOne.computer = Game.computer;
     Game.playerTwo = new Player('Frank', 0, canvas.width - 100, 50);
 
+    Game.hook.classList.remove('is-active');
+    canvas.classList.add('is-active');
 };
 
 // Animation Loop

@@ -18,102 +18,104 @@
     </div>
 
     <div class="game__right">
-
-      <!-- <div class="game__title text--color-p">
+      <form id="js-game-options" action="#">
+        <!-- <div class="game__title text--color-p">
         Toss a pong to Your paddle, oh valley of plenty! 
       </div> -->
 
-      <!-- <div class="game__controls">
+        <!-- <div class="game__controls">
         <div class="game__tag">Controls</div>
         <img class="game__image" src="assets/controls.png" alt="game controls" title='game controls'>
       </div> -->
 
-      <div class="game__controls">
-        <div class="game__tag">Game Modes</div>
-        <div class="game-buttons__grid">
+        <div class="game__controls">
+          <div class="game__tag">Game Modes</div>
+          <div class="game-buttons__grid">
 
-          <div class="button"> <input type="radio" class="button__radio" name="player" value="computer" checked>
-            <div class="button__inner">
-              <div class='button__item text--xl text--color-p'>
-                <img src="./assets/man.svg" class="button--man" alt="">
+            <div class="button"> <input type="radio" class="button__radio" name="player" value="computer" checked>
+              <div class="button__inner">
+                <div class='button__item text--xl text--color-p'>
+                  <img src="./assets/man.svg" class="button--man" alt="">
+                </div>
+                <div class='button__item text--xl text--bold'>Vs <br> Computer</div>
+                <div class='button__item text--xl text--color-p'>
+                  <img src="./assets/ai.svg" class="button--computer" alt="">
+                </div>
               </div>
-              <div class='button__item text--xl text--bold'>Vs <br> Computer</div>
-              <div class='button__item text--xl text--color-p'>
-                <img src="./assets/ai.svg" class="button--computer" alt="">
+            </div>
+
+            <div class="button">
+              <input type="radio" class="button__radio" name="player" value="friend">
+              <div class="button__inner">
+                <div class='button__item text--xl text--color-p'>
+                  <img src="./assets/man.svg" class="button--man" alt="">
+                </div>
+                <div class='button__item text--xl text--bold'>Vs <br> Friend</div>
+                <div class='button__item text--xl text--color-p'>
+                  <img src="./assets/man.svg" class="button--man" alt="">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="game__controls">
+          <div class="game__tag">Game Level</div>
+
+
+          <div class="game-buttons__grid">
+
+            <div class="button">
+              <input type="radio" class="button__radio" name="level" value="easy" checked>
+              <div class="button__inner">
+                <div class='button__item text--xl'>
+                  <img src="./assets/easy.svg" class="button--man" alt="">
+                  <span class="button__tag text--color-i">Easy</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="button">
+              <input type="radio" class="button__radio" name="level" value="hard">
+              <div class="button__inner">
+                <div class='button__item text--xl'>
+                  <img src="./assets/hard.svg" class="button--computer" alt="">
+                  <span class="button__tag text--color-i">Hard</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="button">
+              <input type="radio" class="button__radio" name="level" value="hard">
+              <div class="button__inner">
+                <div class='button__item text--xl'>
+                  <img src="./assets/insane.svg" class="button--computer" alt="">
+                  <span class="button__tag text--color-i">Insane</span>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="button">
-            <input type="radio" class="button__radio" name="player" value="friend">
-            <div class="button__inner">
-              <div class='button__item text--xl text--color-p'>
-                <img src="./assets/man.svg" class="button--man" alt="">
-              </div>
-              <div class='button__item text--xl text--bold'>Vs <br> Friend</div>
-              <div class='button__item text--xl text--color-p'>
-                <img src="./assets/man.svg" class="button--man" alt="">
+        <div class="game__start">
+          <div class="game-buttons__grid">
+
+            <button type="submit" class="button js-start-game">
+              <div class="button__inner button__inner--padding">
+                <div class="button__title text--xl text--color-p">
+                  Toss a pong to Your paddle, oh valley of plenty!
+                </div>
               </div>
             </div>
+
           </div>
 
         </div>
-      </div>
-
-      <div class="game__controls">
-        <div class="game__tag">Game Level</div>
-
-
-        <div class="game-buttons__grid">
-
-          <div class="button">
-            <input type="radio" class="button__radio" name="level" value="easy" checked>
-            <div class="button__inner">
-              <div class='button__item text--xl'>
-                <img src="./assets/easy.svg" class="button--man" alt="">
-                <span class="button__tag text--color-i">Easy</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="button">
-            <input type="radio" class="button__radio" name="level" value="hard">
-            <div class="button__inner">
-              <div class='button__item text--xl'>
-                <img src="./assets/hard.svg" class="button--computer" alt="">
-                <span class="button__tag text--color-i">Hard</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="button">
-            <input type="radio" class="button__radio" name="level" value="hard">
-            <div class="button__inner">
-              <div class='button__item text--xl'>
-                <img src="./assets/insane.svg" class="button--computer" alt="">
-                <span class="button__tag text--color-i">Insane</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="game__start">
-        <div class="game-buttons__grid">
-
-          <div class="button js-start-game">
-            <div class="button__inner button__inner--padding">
-              <div class="button__title text--xl text--color-p">
-                Toss a pong to Your paddle, oh valley of plenty!
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
+      </form>
 
     </div>
+    <!--game__right end-->
 
   </div>
   <canvas></canvas>
