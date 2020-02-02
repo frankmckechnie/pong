@@ -16,13 +16,13 @@ class Options {
         this.levels = {
             easy: {
                 ball:{
-                    radius: 10,
-                    velocity:{x: 5, y: 5}
+                    radius: 20,
+                    velocity:{x: 7, y: 7}
                 },
                 paddle:{
-                    height: 300,
-                    width: 200,
-                    speed: 8
+                    height: 100,
+                    width: 20,
+                    speed: 5
                 }
             },
             hard: {
@@ -31,8 +31,8 @@ class Options {
                     velocity:{x: 10, y: 10}
                 },
                 paddle:{
-                    height: 200,
-                    width: 200,
+                    height: 60,
+                    width: 20,
                     speed: 10
                 }
             },
@@ -42,9 +42,9 @@ class Options {
                     velocity:{x:15, y: 15}
                 },
                 paddle:{
-                    height: 200,
-                    width: 200,
-                    speed: 13
+                    height: 30,
+                    width: 20,
+                    speed: 17
                 }
             }
         };
@@ -57,4 +57,4 @@ class Options {
 }
 
 
-export default options;
+export default Options;

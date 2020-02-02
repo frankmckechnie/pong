@@ -2,7 +2,7 @@ import utils from './utils';
 import Ball from './ball';
 import Paddle from './paddle';
 import Player from './player';
-import options from './options';
+import Options from './options';
 
 import hit from '../assets/hit.mp3';
 import end from '../assets/end-of-game.mp3';
@@ -19,14 +19,15 @@ const mouse = {
 };
 
 
-const colors = ['#2185C5', '#7ECEFD', '#FF7F66','#ff8364', '#ffb677'];
-const backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF','#21232f'];
+const colors = ['#2185C5', '#7ECEFD', '#FF7F66', '#ff8364', '#ffb677'];
+const backgrounds = ['#ffffff', '#000000', '#261a67', '#e8ebf5', '#E3EAEF', '#21232f'];
 
-let backgroundGradient = c.createLinearGradient(0,0,0, canvas.height);
-backgroundGradient.addColorStop(0,utils.randomColor(backgrounds));
+let backgroundGradient = c.createLinearGradient(0, 0, 0, canvas.height);
+backgroundGradient.addColorStop(0, utils.randomColor(backgrounds));
 
 // Implementation
 const Game = {
+    form: document.getElementById('js-game-options'),
     hook: document.querySelector('.game'),
     ball: undefined,
     c: c,
@@ -36,10 +37,15 @@ const Game = {
     playerOne: undefined,
     playerTwo: undefined,
     direction: true,
-    computer: false,
     fields: {
-        LEVEL:'level', 
-        PLAYER: 'player'
+        LEVEL: 'level',
+        PLAYER: 'player',
+        MUSIC: 'music'
+    },
+    options: undefined,
+    audio: {
+        hit: new Audio(hit),
+        end: new Audio(end)
     }
 };
 
@@ -52,26 +58,22 @@ addEventListener('mousemove', (event) => {
 addEventListener('resize', () => {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
-    Game.init(Game.computer);
+    if(Game.options){
+        Game.init(Game.options);
+    }
 });
 
-// document.querySelector('.js-player-one').addEventListener('click', () => {
-//     Game.computer = true;
-//     Game.init();
-//     Game.animate();
-//     Game.hook.classList.remove('is-active');
-//     canvas.classList.add('is-active');
-// });
 
-document.getElementById('js-game-options').addEventListener('submit', (e) => {
+Game.form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const level = formData.get(Game.fields.LEVEL);
     const player = formData.get(Game.fields.PLAYER);
-    
-    const options = new Options(level, player);
-    Game.init(options);
+    // const music = formData.get(Game.fields.MUSIC);
+
+    Game.options = new Options(Game, level, player);
+    Game.init(Game.options);
     Game.animate();
 });
 
@@ -127,45 +129,35 @@ addEventListener('keyup', event => {
 });
 
 Game.playHit = () => {
-    let audio = new Audio(hit);
-    audio.play();
+    Game.audio.hit.play();
 };
 
 Game.reset = () => {
+    Game.audio.end.play();
 
-    let audio = new Audio(end);
-    audio.play();
-
-    let dx =  utils.randomIntFromRange(4.5, 6.5);
-    let direction =  (Game.direction) ? -dx : dx;
+    const ball =  Game.options.level.ball;
+    let direction = (Game.direction) ? -ball.velocity.x : ball.velocity.x;
     Game.direction = (Game.direction) ? false : true;
 
-    let bConf = {
-        radius: 10,
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        dx: direction,
-        dy: utils.randomIntFromRange(4, 6.5),
-        color: utils.randomColor(colors)
-    };
+    const wHalf = canvas.width / 2;
+    const hHalf = canvas.height / 2;
 
-    Game.ball = new Ball(bConf.x, bConf.y, bConf.dx, bConf.dy, bConf.radius, bConf.color);
+    Game.ball = new Ball(wHalf, hHalf, direction, ball.velocity.y, ball.radius, utils.randomColor(colors));
+
 };
 
 Game.init = (options) => {
-
     const ball = options.level.ball;
-    const paddle = options.level.paddel;
-    const wHalf =  canvas.width / 2;
-    const hHalf =  canvas.height / 2;
+    const paddle = options.level.paddle;
+    const wHalf = canvas.width / 2;
+    const hHalf = canvas.height / 2;
 
     Game.ball = new Ball(wHalf, hHalf, ball.velocity.x, ball.velocity.y, ball.radius, utils.randomColor(colors));
     Game.leftPaddle = new Paddle(10, hHalf, paddle.width, paddle.height, paddle.speed, utils.randomColor(colors));
     Game.rightPaddle = new Paddle(canvas.width - 30, hHalf, paddle.width, paddle.height, paddle.speed, utils.randomColor(colors));
-    
-    Game.playerOne = new Player('Computer', 0, 10, 50);
-    Game.playerOne.computer = Game.computer;
-    Game.playerTwo = new Player('Frank', 0, canvas.width - 100, 50);
+
+    Game.playerOne = new Player('Player One', 0, 10, 50, options.mode.computer);
+    Game.playerTwo = new Player('Player Two', 0, canvas.width - 125, 50, false);
 
     Game.hook.classList.remove('is-active');
     canvas.classList.add('is-active');

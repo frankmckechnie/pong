@@ -1,11 +1,11 @@
 class Player{
 
-    constructor(name, score, x, y) {
+    constructor(name, score, x, y, computer) {
         this.name = name;
         this.score = score;
         this.x = x;
         this.y = y;
-        this.computer = false;
+        this.computer = computer;
     }
 
     draw(c) {
@@ -23,7 +23,7 @@ class Player{
     }
 
     automate(game){
-        game.leftPaddle.y =+ game.ball.y * 0.87;
+        game.leftPaddle.y =+ game.ball.y * 0.99;
     }
 
 

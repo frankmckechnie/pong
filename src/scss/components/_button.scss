@@ -54,6 +54,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 
     &__tag{
@@ -63,6 +64,11 @@
 
     &--grow{
         flex-grow: 1;
+    }
+
+    &--quarter{
+        width: 23%;
+        flex-basis: 23%;
     }
 
     &--man, &--computer{
