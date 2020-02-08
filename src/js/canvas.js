@@ -7,6 +7,7 @@ import Options from './options';
 import hit from '../assets/hit.mp3';
 import end from '../assets/end-of-game.mp3';
 
+
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
@@ -70,11 +71,15 @@ Game.form.addEventListener('submit', (e) => {
     const formData = new FormData(e.target);
     const level = formData.get(Game.fields.LEVEL);
     const player = formData.get(Game.fields.PLAYER);
-    // const music = formData.get(Game.fields.MUSIC);
+    const music = formData.get(Game.fields.MUSIC);
 
-    Game.options = new Options(Game, level, player);
+    console.log(music);
+
+    Game.options = new Options(Game, level, player, music);
     Game.init(Game.options);
     Game.animate();
+    console.log(Game.options.music);
+    Game.options.music.play();
 });
 
 addEventListener('keydown', event => {

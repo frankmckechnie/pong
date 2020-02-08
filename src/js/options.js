@@ -1,3 +1,4 @@
+import MusicPlayer from'./music';
 /**
  * 
  * Game Options
@@ -5,11 +6,12 @@
  */
 
 class Options {
-    constructor(game, level, player) {
+    constructor(game, level, player, music) {
         this.setDefaults();
         this.game = game;
         this.level = this.levels[level];
         this.mode = this.modes[player];
+        this.music = new MusicPlayer(music);
     }
 
     setDefaults(){
