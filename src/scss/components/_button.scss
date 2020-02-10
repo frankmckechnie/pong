@@ -41,7 +41,9 @@
         z-index: 11;
     }
 
-    &__inner:hover,  &__radio:checked ~ &__inner, &__radio:hover ~ &__inner{
+    &__inner:hover,  &__radio:checked ~ &__inner, 
+    &__radio:hover ~ &__inner, 
+    &__preview:hover ~ &__inner{
         background-color: $forth-color;
         color: $fith-color;
         span:nth-of-type(2){
@@ -54,7 +56,21 @@
         outline: 2px solid #ffff;
     }
 
-    
+    &__preview{
+        width: 30px;
+        height: 30px;
+        top: 10px; left: 10px;
+        position: absolute;
+        z-index: 12;
+        cursor: pointer;
+
+        &--spin{
+            -webkit-animation:spin 4s linear infinite;
+            -moz-animation:spin 4s linear infinite;
+            animation:spin 4s linear infinite;
+        }
+    }
+
 
     &__item{
         flex-grow: 1;

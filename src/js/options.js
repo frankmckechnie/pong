@@ -1,4 +1,5 @@
-import MusicPlayer from'./music';
+import Game from './Game';
+
 /**
  * 
  * Game Options
@@ -11,7 +12,8 @@ class Options {
         this.game = game;
         this.level = this.levels[level];
         this.mode = this.modes[player];
-        this.music = new MusicPlayer(music);
+        this.music = Game.musicPlayer;
+        this.music.sortTune(music).setAudio();
     }
 
     setDefaults(){

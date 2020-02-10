@@ -33,6 +33,10 @@ const utils = {
             return true;
         }
         return false;
+    },
+    mouse:{
+        x: innerWidth / 2,
+        y: innerHeight / 2
     }
 };
 

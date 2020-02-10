@@ -2,7 +2,6 @@ import may from '../assets/tune-one.mp3';
 import rolem from '../assets/tune-two.mp3';
 import captain from '../assets/tune-three.mp3';
 
-
 const MusicTypes = {
     MAY: 1,
     ROLEM: 2,
@@ -15,22 +14,22 @@ class MusicPlayer {
     constructor(type) {
         this.tune = undefined;
         this.audio = undefined;
+        this.timer = undefined;
         this.mute = false;
         this.sortTune(type).setAudio(this.tune);
     }
 
-    setTune(tune){
+    setTune(tune) {
         this.tune = tune;
-        console.log('this is the tune' , tune);
+        this.mute = false;
+        console.log('this is the tune', tune);
     }
 
-    setMute(mute){
+    setMute(mute) {
         this.mute = mute;
     }
 
     sortTune(type) {
-
-        console.log(MusicTypes.MAY == type);
 
         switch (parseInt(type)) {
         case MusicTypes.MAY:
@@ -52,19 +51,21 @@ class MusicPlayer {
         return this;
     }
 
-    setAudio(tune){
+    setAudio(tune = this.tune) {
         this.audio = new Audio(tune);
         return this;
     }
 
-    preview() {
-        setTimeout(function(){
+    preview(fn) {
+        this.play(true);
+        this.timer = setTimeout(()=>{
             this.pause().reset();
-        }, 2000);
+            fn(this);
+        }, 10000);
     }
 
-    play() {
-        if(this.mute) return false;
+    play(override = false) {
+        if (this.mute && !override) return false;
         this.audio.play();
         return this;
     }
@@ -74,8 +75,9 @@ class MusicPlayer {
         return this;
     }
 
-    reset(){
+    reset() {
         this.audio.currentTime = 0;
+        clearTimeout(this.timer);
         return this;
     }
 
