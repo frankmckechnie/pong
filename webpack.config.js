@@ -29,17 +29,6 @@ module.exports = {
         loader: 'html-loader'
       },
       {
-        test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              esModule: false,
-            }
-          },
-        ],
-      },
-      {
         test: /\.(sa|sc|c)ss$/,
         use: [
           {
@@ -49,6 +38,19 @@ module.exports = {
           'sass-loader'
         ],
       },
+      {
+        test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3|webp)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
+            },
+          },
+        ],
+      }
     ]
   },
   plugins: [
