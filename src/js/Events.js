@@ -21,6 +21,9 @@ addEventListener('mousemove', (event) => {
  * Resize event, reset canvas 
  */
 addEventListener('resize', () => {
+
+    if(Game.menu.isActive()) return; 
+
     Game.canvas.width = innerWidth;
     Game.canvas.height = innerHeight;
     if(Game.options){

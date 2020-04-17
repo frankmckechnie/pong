@@ -4,6 +4,7 @@
 import hit from '../assets/hit.mp3';
 import end from '../assets/end-of-game.mp3';
 import MusicPlayer from './MusicPlayer';
+import Menu from './menu';
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
@@ -23,10 +24,13 @@ const Game = {
     playerTwo: undefined,
     direction: true,
     options: undefined,
+    isPaused: false,
     audio: {
         hit: new Audio(hit),
         end: new Audio(end)
     }
 };
+
+Game.menu = new Menu(Game);
 
 export default Game;

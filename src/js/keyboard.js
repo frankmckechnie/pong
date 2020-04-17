@@ -1,5 +1,4 @@
 import Game from './Game';
-
 /**
  * All keyboard events
  * 
@@ -14,6 +13,7 @@ addEventListener('keydown', event => {
     }
 
     switch (event.keyCode) {
+
     case 87: // left up
         Game.leftPaddle.up = true;
         break;
@@ -26,6 +26,10 @@ addEventListener('keydown', event => {
         break;
     case 40: // down
         Game.rightPaddle.down = true;
+        break;
+
+    case 27: // ecc has been called, lets reset the game
+        Game.end();
         break;
 
     default:
@@ -43,6 +47,7 @@ addEventListener('keyup', event => {
     }
 
     switch (event.keyCode) {
+
     case 87: // left up
         Game.leftPaddle.up = false;
         break;

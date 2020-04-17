@@ -1,7 +1,9 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 
 
 module.exports = {
@@ -16,12 +18,13 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
-        use:[ {
+        use: [
+          {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env']
           },
-        } , 'eslint-loader']
+        }, 'eslint-loader']
       },
       {
         // HTML LOADER
@@ -32,32 +35,48 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
           },
-          'css-loader',
-          'sass-loader'
-        ],
+
+          
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
+
       {
         test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3|webp)$/i,
         use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
+         {
+          loader: 'file-loader',
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
-            },
+              esModule: false,
+            }
           },
         ],
-      }
+      },
     ]
   },
   plugins: [
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
-      server: { baseDir: ['dist'] },
+      server: {
+        baseDir: ['dist']
+      },
       files: ['./dist/*'],
       notify: false
     }),

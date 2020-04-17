@@ -55,7 +55,7 @@ class Options {
 
         this.modes = {
             computer: {computer: true},
-            player: {computer: false}
+            friend: {computer: false}
         };
     }
 }

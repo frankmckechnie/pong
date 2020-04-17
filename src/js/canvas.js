@@ -3,6 +3,7 @@ import utils from './utils';
 import Ball from './ball';
 import Paddle from './paddle';
 import Player from './player';
+
 import './Events';
 import './keyboard';
 
@@ -39,6 +40,7 @@ Game.init = (options) => {
     const wHalf = Game.canvas.width / 2;
     const hHalf = Game.canvas.height / 2;
 
+    Game.isPaused = false;
     Game.ball = new Ball(wHalf, hHalf, ball.velocity.x, ball.velocity.y, ball.radius, utils.randomColor(colors));
     Game.leftPaddle = new Paddle(10, hHalf, paddle.width, paddle.height, paddle.speed, utils.randomColor(colors));
     Game.rightPaddle = new Paddle(Game.canvas.width - 30, hHalf, paddle.width, paddle.height, paddle.speed, utils.randomColor(colors));
@@ -46,13 +48,40 @@ Game.init = (options) => {
     Game.playerOne = new Player('Player One', 0, 10, 50, options.mode.computer);
     Game.playerTwo = new Player('Player Two', 0, Game.canvas.width - 125, 50, false);
 
-    Game.hook.classList.remove('is-active');
+    Game.menu.hide();
     Game.canvas.classList.add('is-active');
 };
 
+Game.pause = () => {
+    Game.options.music.pause();
+    Game.isPaused = true;
+};
+
+Game.continue = () => {
+    Game.options.music.play();
+    Game.isPaused = false;
+};
+
+Game.end = utils.debounce( () => {
+    
+    Game.pause();
+    let answer = confirm('Are you sure you want to stop?');
+
+    if(!answer) return Game.continue;
+
+    Game.canvas.classList.remove('is-active');
+    Game.menu.show();
+    Game.c.clearRect(0, 0, Game.canvas.width, Game.canvas.height);
+    Game.ball = undefined;
+    window.cancelAnimationFrame(Game.animate);
+
+}, 300);
+
 // Animation Loop
 Game.animate = () => {
-    requestAnimationFrame(Game.animate);
+    window.requestAnimationFrame(Game.animate);
+    if(Game.isPaused) return false;
+
     Game.c.clearRect(0, 0, Game.canvas.width, Game.canvas.height);
     Game.c.fillStyle = backgroundGradient;
     Game.c.fillRect(0, 0, Game.canvas.width, Game.canvas.height);

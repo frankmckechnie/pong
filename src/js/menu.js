@@ -1,3 +1,4 @@
+
 /**
  * 
  * Game menu
@@ -7,26 +8,21 @@
 class Menu {
 
     // menu
-
-    constructor(selector, hooks){
-        this.menu = document.querySelector(selector);
-        console.log(hooks, this.menu);
-        // gameMode
-        // gameLevel
-
+    constructor(Game){
+        this.menu = Game.hook;
     }
 
-    getOptions(){
-        let options = this.menu.querySelectorAll('.js-options');
-        console.log(options);
-
+    isActive(){
+        return this.menu.classList.contains('is-active');
     }
 
+    hide(){
+        this.menu.classList.remove('is-active');
+    }
 
-
+    show(){
+        this.menu.classList.add('is-active');
+    }
 }
 
-
-const menu = new Menu('.js-menu');
-menu.getOptions();
-
+export default Menu;
