@@ -25,6 +25,7 @@ const Game = {
     direction: true,
     options: undefined,
     isPaused: false,
+    isStoped: false,
     audio: {
         hit: new Audio(hit),
         end: new Audio(end)
